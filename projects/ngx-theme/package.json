@@ -4,6 +4,20 @@
         "name": "Diane DENOEL",
         "email": "diane.denoel@gmail.com"
     },
+    "description": "Library for dynamic mangement of theming in Angular apps",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ddenoel/yby-ngx-theme",
+        "directory": "projects/ngx-theme"
+    },
+    "homepage": "https://github.com/ddenoel/yby-ngx-theme/tree/master/projects/ngx-theme",
+    "keywords": [
+        "angular",
+        "typescript",
+        "material",
+        "tailwind",
+        "theming"
+    ],
     "version": "0.0.1",
     "license": "MIT",
     "peerDependencies": {
@@ -14,5 +28,8 @@
     "dependencies": {
         "tinycolor2": "^1.4.2",
         "tslib": "^2.3.0"
+    },
+    "exports": {
+        "./tailwind-preset": "./presets/tailwind/tailwind.preset.js"
     }
 }

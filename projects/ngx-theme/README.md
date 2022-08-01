@@ -120,15 +120,16 @@ export class AppComponent {
 
 ```js
 // tailwind.config.js
+const tailwindPreset = require('@yby/ngx-theme/tailwind-preset');
 
-const ngThemePreset = tailwindPreset({
+const ngxThemePreset = tailwindPreset({
     palettes: ['myPaletteName'],
     simpleColors: ['myColorName'],
 });
 
 module.exports = {
     // ...
-    presets: [ngThemePreset],
+    presets: [ngxThemePreset],
 };
 ```
 
@@ -144,9 +145,9 @@ You can then use tailwind class with your color names:
 
 ```json
 // angular.json
-   "styles" : [
-     "node_modules/ngx-theme/presets/material/*.scss"
-   ],
+   "stylePreprocessorOptions": {
+        "includePaths": ["node_modules/@yby/ngx-theme/presets/material"]
+    },
 ```
 
 ```css
