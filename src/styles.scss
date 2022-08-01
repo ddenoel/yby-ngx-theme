@@ -1,4 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@use '../dist/ngx-theme/presets/material/generate-material-palette' as palette;
+
+@include mat.core();
+
+$primary-palette: palette.createpalette('primary');
+$accent-palette: palette.createpalette('accent');
+$warn-palette: palette.createpalette('custom1');
+
+
+$my-primary-palette: mat.define-palette($primary-palette);
+$my-accent-palette: mat.define-palette($accent-palette);
+$my-warn-palette: mat.define-palette($warn-palette);
+
+$my-theme: mat.define-light-theme(
+    (
+        color: (
+            primary: $my-primary-palette,
+            accent: $my-accent-palette,
+            warn: $my-warn-palette
+        )
+    )
+);
+
+
+@include mat.all-component-themes($my-theme);
 
 @tailwind base;
 @tailwind components;
@@ -12,3 +37,5 @@ body {
         background-color: #E6E8E6;
         color: #2B303A;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

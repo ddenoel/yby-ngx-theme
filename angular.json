@@ -25,7 +25,10 @@
                         "inlineStyleLanguage": "scss",
                         "assets": ["src/favicon.ico", "src/assets"],
                         "allowedCommonJsDependencies": ["tinycolor2"],
-                        "styles": ["src/styles.scss"],
+                        "styles": [
+                            "src/styles.scss",
+                            "dist/ngx-theme/presets/material/_generate-material-palette.scss"
+                        ],
                         "scripts": []
                     },
                     "configurations": {

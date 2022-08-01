@@ -13,30 +13,17 @@
         700: var(--color-#{$color-name}-700),
         800: var(--color-#{$color-name}-800),
         900: var(--color-#{$color-name}-900),
-        a100: var(--color-#{$color-name}-100),
-        // TODO replace with accentuated colors
-        a200: var(--color-#{$color-name}-200),
-        a400: var(--color-#{$color-name}-400),
-        a700: var(--color-#{$color-name}-700),
-    );
-
-    $contrast: (
-        50: var(--color-#{$color-name}-contrast-50),
-        100: var(--color-#{$color-name}-contrast-100),
-        200: var(--color-#{$color-name}-contrast-200),
-        300: var(--color-#{$color-name}-contrast-300),
-        400: var(--color-#{$color-name}-contrast-400),
-        500: var(--color-#{$color-name}-contrast-500),
-        600: var(--color-#{$color-name}-contrast-600),
-        700: var(--color-#{$color-name}-contrast-700),
-        800: var(--color-#{$color-name}-contrast-800),
-        900: var(--color-#{$color-name}-contrast-900),
-    );
-
-    $palette: map.merge(
-        $palette,
-        (
-            contrast: $contrast,
+        contrast: (
+            50: var(--color-#{$color-name}-50-contrast),
+            100: var(--color-#{$color-name}-100-contrast),
+            200: var(--color-#{$color-name}-200-contrast),
+            300: var(--color-#{$color-name}-300-contrast),
+            400: var(--color-#{$color-name}-400-contrast),
+            500: var(--color-#{$color-name}-500-contrast),
+            600: var(--color-#{$color-name}-600-contrast),
+            700: var(--color-#{$color-name}-700-contrast),
+            800: var(--color-#{$color-name}-800-contrast),
+            900: var(--color-#{$color-name}-900-contrast),
         )
     );
 

@@ -2,7 +2,7 @@
 <div class="container mx-auto bg-white p-12 pt-6 mt-6 rounded-lg">
   <ng-container *ngFor="let palette of themeService.theme.palettes | keyvalue">
     <div class="flex items-center">
-      <h3 class="w-48">Palette: <span class="text-{{ palette.key }}-500">"{{ palette.key }}"</span></h3>
+      <h4 class="w-48">Palette: <span class="text-{{ palette.key }}-500">"{{ palette.key }}"</span></h4>
       <input type="color" [(ngModel)]="colors[palette.key]" (ngModelChange)="reloadTheme()"/>
     </div>
 
@@ -17,4 +17,13 @@
       </ng-container>
     </div>
   </ng-container>
+
+  <div class="mt-12">
+    <h3>Example material chips:</h3>
+    <mat-chip-list aria-label="color chips">
+      <mat-chip color="primary" selected>Primary chip</mat-chip>
+      <mat-chip color="accent" selected>Accent chip</mat-chip>
+      <mat-chip color="warn" selected>Warn chip</mat-chip>
+    </mat-chip-list>
+  </div>
 </div>

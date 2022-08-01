@@ -6,7 +6,8 @@ import { NgxThemeModule } from 'ngx-theme';
 
 import { AppComponent } from './app.component';
 import { COLORS } from './colors.data';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatChipsModule } from '@angular/material/chips';
 @NgModule({
     declarations: [AppComponent],
     imports: [
@@ -14,6 +15,8 @@ import { COLORS } from './colors.data';
         NgxThemeModule.forRoot({ palettes: COLORS }),
         NgPipesModule,
         FormsModule,
+        BrowserAnimationsModule,
+        MatChipsModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

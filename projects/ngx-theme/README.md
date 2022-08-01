@@ -19,12 +19,12 @@ This purpose of this lib is to manage dynamic themes accross Angular apps.
 
 ## Requirements
 
--   Angular 10 or higher
+-   Angular 12 or higher
 
 ## Supported UI frameworks
 
 -   ✅ Tailwind
--   🚧 Angular Material
+-   ✅ Angular Material > 12.0.0
 
 ## Principle
 
@@ -142,25 +142,32 @@ You can then use tailwind class with your color names:
 
 #### Add material theme
 
+```json
+// angular.json
+   "styles" : [
+     "node_modules/ngx-theme/presets/material/*.scss"
+   ],
+```
+
 ```css
 /* styles.scss */
 @use '@angular/material' as mat;
-@use './generate-material-palette' as palette;
+@use 'generate-material-palette' as palette;
 
-$primary-palette: createpalette('myPaletteName');
-$accent-palette: createpalette('myOtherPaletteName');
-$warn-palette: createpalette('myThirdPaletteName');
+$primary-palette: palette.createpalette('myPaletteName');
+$accent-palette: palette.createpalette('myOtherPaletteName');
+$warn-palette: palette.createpalette('myThirdPaletteName');
 
-$my-primary-palette: mat.define-palette(palette.$primary-palette);
-$my-accent-palette: mat.define-palette(palette.$accent-palette);
-$my-warn-palette: mat.define-palette(palette.$warn-palette);
+$material-primary-palette: mat.define-palette($primary-palette);
+$material-accent-palette: mat.define-palette($accent-palette);
+$material-warn-palette: mat.define-palette($warn-palette);
 
 $my-theme: mat.define-light-theme(
     (
         color: (
-            primary: $my-primary-palette,
-            accent: $my-accent-palette,
-            warn: $my-warn-palette
+            primary: $material-primary-palette,
+            accent: $material-accent-palette,
+            warn: $material-warn-palette
         )
     )
 );
