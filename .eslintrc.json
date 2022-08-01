@@ -1,0 +1,16 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint/eslint-plugin", "unused-imports", "prettier"],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": ["error", { "ignoreRestSiblings": true }],
+    "unused-imports/no-unused-imports": ["error", { "ignoreRestSiblings": true }],
+    "newline-before-return": 2,
+    "prettier/prettier": "error"
+  },
+  "ignorePatterns": ["*.js"]
+}
