@@ -75,7 +75,7 @@ All these color shades are then inserted in the document as CSS variables and th
 ## Installation
 
 ```sh
-yarn add @yby/ngx-theme
+yarn add @brumeilde/ngx-theme
 ```
 
 ## Use
@@ -120,7 +120,7 @@ export class AppComponent {
 
 ```js
 // tailwind.config.js
-const tailwindPreset = require('@yby/ngx-theme/tailwind-preset');
+const tailwindPreset = require('@brumeilde/ngx-theme/tailwind-preset');
 
 const ngxThemePreset = tailwindPreset({
     palettes: ['myPaletteName'],
@@ -146,7 +146,7 @@ You can then use tailwind class with your color names:
 ```json
 // angular.json
    "stylePreprocessorOptions": {
-        "includePaths": ["node_modules/@yby/ngx-theme/presets/material"]
+        "includePaths": ["node_modules/@brumeilde/ngx-theme/presets/material"]
     },
 ```
 
