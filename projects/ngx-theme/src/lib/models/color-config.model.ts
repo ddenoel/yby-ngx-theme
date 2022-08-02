@@ -37,7 +37,7 @@ export class ColorConfig implements IColorConfig {
 
         if (colorConfig.simpleColors) {
             Object.entries(colorConfig.simpleColors).forEach((colorEntry) =>
-                setColor(colorEntry, this.palettes),
+                setColor(colorEntry, this.simpleColors),
             );
         }
     }

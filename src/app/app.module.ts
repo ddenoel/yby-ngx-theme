@@ -12,7 +12,7 @@ import { MatChipsModule } from '@angular/material/chips';
     declarations: [AppComponent],
     imports: [
         BrowserModule,
-        NgxThemeModule.forRoot({ palettes: COLORS }),
+        NgxThemeModule.forRoot({ palettes: COLORS, simpleColors: { background: '#F3F2F2' } }),
         NgPipesModule,
         FormsModule,
         BrowserAnimationsModule,
