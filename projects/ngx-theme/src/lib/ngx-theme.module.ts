@@ -10,7 +10,7 @@ export type ModuleOptions = { frameworks: Frameworks[] };
 
 function initTheme(themeService: NgxThemeService<ColorConfig>) {
     return () => {
-        return themeService.initTheme();
+        return themeService.updateColors();
     };
 }
 

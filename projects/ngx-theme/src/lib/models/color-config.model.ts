@@ -1,25 +1,35 @@
 import { ColorUtils } from '../utils/color-utils';
 
 /**
- * ColorConfig type, must be of type `{ 'colorName': 'hexaValue' }`
+ * - Palettes: will generate a range of colors shades
+ * - simpleColors: will remain single color
+ *
+ * Each key must be of type `{ 'colorName': 'hexaValue' }`
  */
-export type IColorConfig = {
-    palettes?: Record<string, string>;
-    simpleColors?: Record<string, string>;
+export type IColorConfig<
+    Palettes extends Record<string, string> = Record<string, string>,
+    SimpleColors extends Record<string, string> = Record<string, string>,
+> = {
+    palettes?: Palettes;
+    simpleColors?: SimpleColors;
 };
 
-export class ColorConfig implements IColorConfig {
-    palettes: Record<string, string> = {};
-    simpleColors: Record<string, string> = {};
+export class ColorConfig<
+    Palettes extends Record<string, string> = Record<string, string>,
+    SimpleColors extends Record<string, string> = Record<string, string>,
+> implements IColorConfig<Palettes, SimpleColors>
+{
+    palettes: Palettes = {} as Palettes;
+    simpleColors: SimpleColors = {} as SimpleColors;
 
-    constructor(colorConfig: IColorConfig) {
+    constructor(colorConfig: Partial<IColorConfig>) {
         const setColor = (
             [colorName, hexa]: [string, string],
             destinationColor: Record<string, string>,
         ) => {
             if (!ColorUtils.isColorValidHexa(hexa)) {
                 console.error(
-                    `Color with name "${colorName}" = ${hexa} doesn't match hexa color, it will be ignored.`,
+                    `Color with name "${colorName}" = ${hexa} is not hexa color, it will be ignored.`,
                 );
 
                 return;
@@ -29,13 +39,13 @@ export class ColorConfig implements IColorConfig {
             }
             destinationColor[colorName] = hexa;
         };
-        if (colorConfig.palettes) {
+        if (colorConfig?.palettes) {
             Object.entries(colorConfig.palettes).forEach((colorEntry) =>
                 setColor(colorEntry, this.palettes),
             );
         }
 
-        if (colorConfig.simpleColors) {
+        if (colorConfig?.simpleColors) {
             Object.entries(colorConfig.simpleColors).forEach((colorEntry) =>
                 setColor(colorEntry, this.simpleColors),
             );

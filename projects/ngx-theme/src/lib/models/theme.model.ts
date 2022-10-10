@@ -1,15 +1,15 @@
 import { ColorShadeName } from './color-shade.model';
 import { PaletteName, IThemeColorPalettes, Palette } from './palette.model';
-import { ThemeSimpleColors } from './simple-colors.model';
+import { IThemeSimpleColors } from './simple-colors.model';
 
 export interface ITheme {
     palettes: IThemeColorPalettes;
-    colors: ThemeSimpleColors;
+    colors: IThemeSimpleColors;
 }
 
 export class Theme implements ITheme {
     palettes: IThemeColorPalettes;
-    colors: ThemeSimpleColors;
+    colors: IThemeSimpleColors;
 
     constructor({ palettes, colors }: ITheme) {
         this.palettes = palettes;

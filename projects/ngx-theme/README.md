@@ -1,7 +1,5 @@
 # ngx-theme
 
-<h2 style="color: red;">⚠️🚧 This library is still a work in progress<h2>
-
 ---
 
 ## Table of content
@@ -80,37 +78,72 @@ yarn add @brumeilde/ngx-theme
 
 ## Use
 
-#### With `NgxThemeModule` (with or without config) :
+#### With `NgxThemeModule` :
+
+##### forRoot config
 
 ```js
+type Palettes = { myPaletteName: string };
+type Colors = { myColorName: string };
+
+const colorConfig: IColorConfig<Palettes, Colors> = {
+    palettes: { myPaletteName: '#5876d9' },
+    simpleColors: { myColorName: '#2e959a' },
+};
+
 @NgModule({
-    ...
+    // ...
     imports: [
-        NgxThemeModule.forRoot({
-                palettes: { myPaletteName: '#5876d9' },
-                simpleColors: { myColorName: '#2e959a' }
-        }, {
-                frameworks: ['tailwind'] // default : ['tailwind', 'material']
+        NgxThemeModule.forRoot(colorConfig, {
+            frameworks: ['tailwind'], // optional, default : ['tailwind', 'material']
         }),
     ],
-    ...
+    // ...
+})
+export class AppModule {}
+```
+
+##### Injection tokens
+
+```js
+type Palettes = { myPaletteName: string };
+type Colors = { myColorName: string };
+
+const colorConfig: IColorConfig<Palettes, Colors> = {
+    palettes: { myPaletteName: '#5876d9' },
+    simpleColors: { myColorName: '#2e959a' },
+};
+
+@NgModule({
+    // ...
+    imports: [NgxThemeModule],
+    providers: [
+        { provide: 'COLOR_CONFIG', useValue: colorConfig },
+        { provide: 'THEME_OPTIONS', useValue: { frameworks: ['tailwind'] } }, // optional, default : ['tailwind', 'material']
+    ],
+    // ...
 })
 export class AppModule {}
 ```
 
 > ℹ️ _`NgxThemeModule` will generate color palettes on app initialization so the theme is created before app inits._
 
-#### With `NgxThemeService` (with or without config):
+#### With `NgxThemeService` :
 
 ```js
-type Colors = { myPaletteName: string };
+type Palettes = { myPaletteName: string };
+type Colors = { myColorName: string };
 
 export class AppComponent {
     constructor(
-        private themeService: NgxThemeService<{ palettes: Colors }>) {}
+        private themeService: NgxThemeService<IColorConfig<Palettes, Colors>>) {}
 
-    onSomethingHappens(): void {
-        this.themeService.initTheme({ palettes: { myPaletteName: '#5876d9' }});
+    setAppColors(): void {
+        this.themeService.updateColors({ palettes: { myPaletteName: '#5876d9' }});
+    }
+
+    get textColor(): string {
+        return this.themeService.theme.getColorShade(300, 'myPaletteName');
     }
 }
 
@@ -177,3 +210,11 @@ $my-theme: mat.define-light-theme(
 
 @include mat.all-component-themes($my-theme);
 ```
+
+## Incoming features
+
+_Whenever I get time_ 🙃
+
+-   Support of custom full palettes with contrast
+-   Material full scss palette generator
+-   Rgb colors
