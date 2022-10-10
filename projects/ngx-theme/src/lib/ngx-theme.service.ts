@@ -61,6 +61,7 @@ export class NgxThemeService<T extends IColorConfig = IColorConfig> {
         if (colorConfig) {
             this.setColorConfig(colorConfig);
         }
+
         if (!this.colorConfig) {
             return;
         }
