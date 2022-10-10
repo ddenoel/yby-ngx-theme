@@ -16,7 +16,10 @@
         "typescript",
         "material",
         "tailwind",
-        "theming"
+        "theming",
+        "dynamic",
+        "theme",
+        "colors"
     ],
     "version": "1.0.0",
     "license": "MIT",
