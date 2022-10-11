@@ -1,15 +1,15 @@
 <h2 class="text-center">Welcome to ngx-theme</h2>
 <div class="container mx-auto bg-white p-12 pt-6 mt-6 rounded-lg">
-  <ng-container *ngFor="let palette of themeService.theme.palettes | keyvalue">
+  <ng-container *ngFor="let color of COLOR_NAMES">
     <div class="flex items-center">
-      <h4 class="w-48">Palette: <span class="text-{{ palette.key }}-500">"{{ palette.key }}"</span></h4>
-      <input type="color" [(ngModel)]="colors[palette.key]" (ngModelChange)="reloadTheme()"/>
+      <h4 class="w-48">Palette: <span class="text-{{ color }}-500">"{{ color }}"</span></h4>
+      <input type="color" [(ngModel)]="colors[color]" (ngModelChange)="reloadTheme()"/>
     </div>
 
     <div class="flex w-full">
-      <ng-container *ngIf="palette.value.getPalette() | keyvalue as paletteShades">
+      <ng-container *ngIf="themeService.theme.getColorPalette(color) | keyvalue as paletteShades">
         <div *ngFor="let shade of paletteShades | orderBy: 'value'" 
-          class="bg-{{ palette.key }}-{{ shade.key }} text-center p-6 first:rounded-l-lg last:rounded-r-lg flex-auto"
+          class="bg-{{ color }}-{{ shade.key }} text-center p-6 first:rounded-l-lg last:rounded-r-lg flex-auto"
           [ngClass]="+shade.key >= 500 ? '!text-white': '!text-black'">
           <p class="hidden md:hidden lg:block font-medium | !my-0">{{ shade.key }}</p>
           <p class="hidden md:hidden lg:block | !my-0">{{ shade.value }}</p>

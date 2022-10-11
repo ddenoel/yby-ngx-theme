@@ -1,4 +1,4 @@
-const tailwindPreset = require('./dist/ngx-theme/presets/tailwind/tailwind.preset');
+const tailwindPreset = require('@brumeilde/ngx-theme/tailwind-preset');
 const { join } = require('path');
 
 const preset = tailwindPreset({ palettes: ['primary', 'accent', 'custom1', 'custom2'] });

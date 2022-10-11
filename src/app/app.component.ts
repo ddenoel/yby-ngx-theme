@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { NgxThemeService } from 'ngx-theme';
+import { IColorConfig, NgxThemeService } from '@brumeilde/ngx-theme';
 import { COLORS } from './colors.data';
-import { PaletteColors } from './colors.model';
+import { COLOR_NAMES, PaletteColors } from './colors.model';
 
 @Component({
     selector: 'ngx-theme-root',
@@ -11,11 +11,14 @@ import { PaletteColors } from './colors.model';
 export class AppComponent {
     title = 'ngx-theme-demo';
     colors: Record<string, string> = COLORS;
+    readonly COLOR_NAMES = COLOR_NAMES;
 
-    constructor(public themeService: NgxThemeService<{ palettes: PaletteColors }>) {}
+    constructor(
+        public themeService: NgxThemeService<IColorConfig<PaletteColors, Record<string, string>>>,
+    ) {}
 
     reloadTheme(): void {
-        this.themeService.initTheme({
+        this.themeService.updateColors({
             palettes: this.colors as PaletteColors,
         });
     }
