@@ -26,6 +26,8 @@ This purpose of this lib is to manage dynamic themes accross Angular apps.
 
 ## Principle
 
+[Demo](https://ngx-theme-demo.herokuapp.com/)
+
 This library generates a palette with darker / lighter variants for each provided color based on the [Material Design color system](https://material.io/design/color/the-color-system.html#color-theme-creation)
 
 Example of a palette format:
