@@ -1,5 +1,5 @@
 @use '@angular/material' as mat;
-@use '../dist/ngx-theme/presets/material/generate-material-palette' as palette;
+@use 'generate-material-palette' as palette;
 
 @include mat.core();
 
