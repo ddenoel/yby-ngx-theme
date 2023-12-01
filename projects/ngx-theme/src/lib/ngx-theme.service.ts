@@ -8,6 +8,7 @@ import { SimpleColorsName, IThemeSimpleColors } from './models/simple-colors.mod
 import { Theme } from './models/theme.model';
 import { ModuleOptions } from './ngx-theme.module';
 import { ColorUtils } from './utils/color-utils';
+import { COLOR_CONFIG, THEME_OPTIONS } from './tokens';
 
 @Injectable({
     providedIn: 'root',
@@ -15,10 +16,10 @@ import { ColorUtils } from './utils/color-utils';
 export class NgxThemeService<T extends IColorConfig = IColorConfig> {
     constructor(
         @Inject(DOCUMENT) private readonly document: Document,
-        @Inject('COLOR_CONFIG')
+        @Inject(COLOR_CONFIG)
         @Optional()
         colorConfig?: T,
-        @Inject('THEME_OPTIONS')
+        @Inject(THEME_OPTIONS)
         @Optional()
         options: Partial<ModuleOptions> = DEFAULT_OPTIONS,
     ) {

@@ -5,7 +5,7 @@
 
 $primary-palette: palette.createpalette('primary');
 $accent-palette: palette.createpalette('accent');
-$warn-palette: palette.createpalette('custom1');
+$warn-palette: palette.createpalette('warn');
 
 
 $my-primary-palette: mat.define-palette($primary-palette);
@@ -30,12 +30,13 @@ $my-theme: mat.define-light-theme(
 @tailwind utilities;
 
 * {
-        font-family: 'Mukta', sans-serif;
+        font-family:  Roboto, "Helvetica Neue", sans-serif;
 }
 
 body {
         background-color: #E6E8E6;
         color: #2B303A;
 }
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

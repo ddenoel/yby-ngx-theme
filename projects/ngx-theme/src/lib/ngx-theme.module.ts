@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgxThemeService } from './ngx-theme.service';
 import { ColorConfig, IColorConfig } from './models/color-config.model';
 import { DEFAULT_OPTIONS } from './data/default-options.data';
+import { COLOR_CONFIG, THEME_OPTIONS } from './tokens';
 
 export type Frameworks = 'tailwind' | 'material';
 
@@ -34,8 +35,8 @@ export class NgxThemeModule {
         return {
             ngModule: NgxThemeModule,
             providers: [
-                { provide: 'COLOR_CONFIG', useValue: colorConfig },
-                { provide: 'THEME_OPTIONS', useValue: options },
+                { provide: COLOR_CONFIG, useValue: colorConfig },
+                { provide: THEME_OPTIONS, useValue: options },
             ],
         };
     }

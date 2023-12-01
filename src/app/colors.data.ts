@@ -1,15 +1,22 @@
+import { IColorConfig } from '@brumeilde/ngx-theme';
 import { PaletteColors } from './colors.model';
 
-export const COLORS: PaletteColors = {
-    primary: '#3a8ba4',
-    accent: '#c74382',
-    custom1: '#a6368e',
-    custom2: '#11a876',
-    custom3: {
-        baseColor: '#7FB5B5',
+export const COLOR_PALETTES: PaletteColors = {
+    primary: {
+        baseColor: '#3a8ba4',
         contrast: {
-            dark: '#2D572C',
-            light: '#EFA94A',
+            dark: '#36454f',
+            light: '#E6EEF7',
         },
+    },
+    accent: '#d87ba8',
+    warn: '#a6368e',
+    custom: '#11a876',
+};
+
+export const COLORS: IColorConfig<PaletteColors> = {
+    palettes: COLOR_PALETTES,
+    simpleColors: {
+        background: '#F3F2F2',
     },
 };

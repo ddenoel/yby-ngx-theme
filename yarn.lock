@@ -1179,10 +1179,10 @@
     "@babel/helper-validator-identifier" "^7.18.6"
     to-fast-properties "^2.0.0"
 
-"@brumeilde/ngx-theme@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@brumeilde/ngx-theme/-/ngx-theme-1.0.0.tgz#751c771f0402eb19e87db4b95c711b114a0e6316"
-  integrity sha512-bJcmdvtRqSVIgR5ln03PumOukx8teN93JMbjbJRs6aqYZxyHbh71ZoD5sQUYUVKaRvCh5spktgvVUYeoec53PQ==
+"@brumeilde/ngx-theme@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@brumeilde/ngx-theme/-/ngx-theme-1.2.0.tgz#638dfb1d4bdc3f4541c8690f4d4ed56869e561a0"
+  integrity sha512-qdCzdc3brB5mmBALa7+UJPMp/0kY8nOygRb5FlvVSQDwOX9JrRcnEDIzHbK8yt4krpMxf9hgV11X/28MJmW/9w==
   dependencies:
     tinycolor2 "^1.4.2"
     tslib "^2.3.0"

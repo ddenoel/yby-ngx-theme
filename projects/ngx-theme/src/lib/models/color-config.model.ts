@@ -13,14 +13,16 @@ import { ColorUtils } from '../utils/color-utils';
  * - `{ 'colorName': 'hexaValue' }` (like simple colors)
  */
 export type IColorConfig<
-    Palettes extends IPalette = IPalette,
-    SimpleColors extends Record<string, string> = Record<string, string>,
+    Palettes extends IPalettesConfig = IPalettesConfig,
+    SimpleColors extends ISimpleColorsConfig = ISimpleColorsConfig,
 > = {
     palettes?: Palettes;
     simpleColors?: SimpleColors;
 };
 
-type IPalette = Record<string, IColorInput>;
+type ISimpleColorsConfig = Record<string, string>;
+
+type IPalettesConfig = Record<string, IColorInput>;
 
 export type IColorInput = string | IDetailedColorInput;
 
@@ -30,7 +32,7 @@ export type IDetailedColorInput = {
 };
 
 export class ColorConfig<
-    Palettes extends IPalette = IPalette,
+    Palettes extends IPalettesConfig = IPalettesConfig,
     SimpleColors extends Record<string, string> = Record<string, string>,
 > implements IColorConfig<Palettes, SimpleColors>
 {
@@ -49,7 +51,7 @@ export class ColorConfig<
         };
         const setColor = <T extends IColorInput>(
             [colorName, hexa]: [string, T],
-            destinationColor: IPalette,
+            destinationColor: IPalettesConfig,
         ) => {
             let isValid = false;
             let finalValue: T;

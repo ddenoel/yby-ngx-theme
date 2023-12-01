@@ -3,7 +3,9 @@
     "version": "0.0.0",
     "scripts": {
         "ng": "ng",
-        "start": "node server.js",
+        "stackblitz-start": "yarn install && ng serve",
+        "start": "ng serve",
+        "start:server": "node server.js",
         "serve": "ng serve",
         "build": "ng build",
         "build:lib": "ng build ngx-theme",
@@ -14,8 +16,8 @@
     },
     "private": true,
     "engines": {
-        "node": "18.13.0",
-        "npm": "8.3.1"
+        "node": "^18.13.0",
+        "npm": "^8.3.1"
     },
     "dependencies": {
         "@angular/animations": "^14.1.0",

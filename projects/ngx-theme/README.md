@@ -2,6 +2,8 @@
 
 ---
 
+### [🔗 Stackblitz demo](https://stackblitz.com/~/github.com/ddenoel/yby-ngx-theme?title=ngxTheme&startScript=stackblitz-start)
+
 ## Table of content
 
 -   [Purpose](#purpose)
@@ -10,6 +12,7 @@
 -   [Principle](#principle)
 -   [Installation](#installation)
 -   [How to use](#use)
+-   [Incoming features](#incoming-features)
 
 ## Purpose
 
@@ -26,7 +29,6 @@ This purpose of this lib is to manage dynamic themes accross Angular apps.
 
 ## Principle
 
-[Demo](https://ngx-theme-demo.herokuapp.com/)
 
 This library generates a palette with darker / lighter variants for each provided color based on the [Material Design color system](https://material.io/design/color/the-color-system.html#color-theme-creation)
 
@@ -114,7 +116,7 @@ export class AppModule {}
 ##### Injection tokens
 
 ```js
-type Palettes = { myPaletteName: string; paletteWithConstrast: DetailedColorInput; };
+type Palettes = { myPaletteName: string; paletteWithConstrast: IDetailedColorInput; };
 type Colors = { myColorName: string };
 
 const colorConfig: IColorConfig<Palettes, Colors> = {
@@ -132,8 +134,8 @@ const colorConfig: IColorConfig<Palettes, Colors> = {
     // ...
     imports: [NgxThemeModule],
     providers: [
-        { provide: 'COLOR_CONFIG', useValue: colorConfig },
-        { provide: 'THEME_OPTIONS', useValue: { frameworks: ['tailwind'] } }, // optional, default : ['tailwind', 'material']
+        { provide: COLOR_CONFIG, useValue: colorConfig },
+        { provide: THEME_OPTIONS, useValue: { frameworks: ['tailwind'] } }, // optional, default : ['tailwind', 'material']
     ],
     // ...
 })
@@ -170,7 +172,7 @@ export class AppComponent {
 const tailwindPreset = require('@brumeilde/ngx-theme/tailwind-preset');
 
 const ngxThemePreset = tailwindPreset({
-    palettes: ['myPaletteName'],
+    palettes: ['myPaletteName', 'paletteWithContrast'],
     simpleColors: ['myColorName'],
 });
 
@@ -185,6 +187,9 @@ You can then use tailwind class with your color names:
 ```html
 <div class="bg-myColorName">
     <p class="text-myPaletteName-400/75">Theme</p>
+</div>
+<div class="bg-paletteWithContrast-600">
+    <p class="text-paletteWithContrast-600-contrast">Constrast test</p>
 </div>
 ```
 
@@ -223,6 +228,16 @@ $my-theme: mat.define-light-theme(
 @include mat.core();
 
 @include mat.all-component-themes($my-theme);
+```
+
+#### CSS
+
+You can also directly use the generated css variables:
+```css
+.my-text {
+    background-color: var(--color-paletteWithContrast-700);
+    color: var(--color-paletteWithContrast-700-contrast);
+}
 ```
 
 ## Incoming features

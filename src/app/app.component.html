@@ -1,17 +1,30 @@
 <h2 class="text-center">Welcome to ngx-theme</h2>
 <div class="container mx-auto bg-white p-12 pt-6 mt-6 rounded-lg">
-  <ng-container *ngFor="let color of COLOR_NAMES">
-    <div class="flex items-center">
-      <h4 class="w-48">Palette: <span class="text-{{ color }}-500">"{{ color }}"</span></h4>
-      <input type="color" [(ngModel)]="colorInputs[color]" (ngModelChange)="reloadTheme()"/>
+  <ng-container *ngFor="let colorKey of PALETTE_NAMES">
+    <div class="flex items-center gap-x-10">
+      <div class="flex items-center">
+        <h4 class="w-40">Palette: <span class="text-{{ colorKey }}-500">"{{ colorKey }}"</span></h4>
+        <input type="color" [(ngModel)]="colorInputs[colorKey]" (ngModelChange)="reloadTheme()"/>
+      </div>
+
+      <ng-container *ngIf="showContrast(colorKey)">
+        <div class="flex items-center">
+          <h4 class="w-40">Dark contrast </h4>
+          <input type="color" [(ngModel)]="colorInputs[colorKey + 'Dark']" (ngModelChange)="reloadTheme()"/>
+        </div>
+
+        <div class="flex items-center">
+          <h4 class="w-40">Light contrast </h4>
+          <input type="color" [(ngModel)]="colorInputs[colorKey + 'Light']" (ngModelChange)="reloadTheme()"/>
+        </div>
+      </ng-container>
     </div>
 
     <div class="flex w-full">
-      <ng-container *ngIf="themeService.theme.getColorPalette(color) | keyvalue as paletteShades">
+      <ng-container *ngIf="themeService.theme.getColorPalette(colorKey) | keyvalue as paletteShades">
         <ng-container *ngFor="let shade of paletteShades | orderBy: 'value'" >
             <div *ngIf="shade.key !== 'contrast'"
-            class="bg-{{ color }}-{{ shade.key }} text-center p-6 first:rounded-l-lg last:rounded-r-lg flex-auto"
-            [style.color]="themeService.theme.getConstrast(color, shade.key)">
+            class="bg-{{ colorKey }}-{{ shade.key }} text-{{ colorKey }}-{{ shade.key }}-contrast text-center p-6 first:rounded-l-lg last:rounded-r-lg flex-auto">
             <p class="hidden md:hidden lg:block font-medium | !my-0">{{ shade.key }}</p>
             <p class="hidden md:hidden lg:block | !my-0">{{ shade.value }}</p>
           </div>
@@ -20,12 +33,29 @@
     </div>
   </ng-container>
 
-  <div class="mt-12">
-    <h3>Example material chips:</h3>
-    <mat-chip-list aria-label="color chips">
-      <mat-chip color="primary" selected>Primary chip</mat-chip>
-      <mat-chip color="accent" selected>Accent chip</mat-chip>
-      <mat-chip color="warn" selected>Warn chip</mat-chip>
-    </mat-chip-list>
+  <mat-divider class="!my-12"></mat-divider>
+
+  <h2>Material</h2>
+  <div class="flex gap-x-6">
+
+    <div class="w-1/3">
+      <h3>Chips:</h3>
+      <mat-chip-list aria-label="color chips">
+        <mat-chip color="primary" selected>Primary chip</mat-chip>
+        <mat-chip color="accent" selected>Accent chip</mat-chip>
+        <mat-chip color="warn" selected>Warn chip</mat-chip>
+      </mat-chip-list>
+    </div>
+
+    <div class="w-1/3">
+      <h3>Buttons:</h3>
+      <div class="flex gap-x-4">
+        <button mat-raised-button color="primary">Primary</button>
+        <button mat-raised-button color="accent">Accent</button>
+        <button mat-raised-button color="warn">Warn</button>
+      </div>
+    </div>
   </div>
+
+
 </div>

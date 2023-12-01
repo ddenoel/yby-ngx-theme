@@ -1,6 +1,8 @@
-import { DetailedColorInput } from 'ngx-theme';
+import { IDetailedColorInput } from '@brumeilde/ngx-theme';
 
-export const COLOR_NAMES = ['primary', 'accent', 'custom1', 'custom2'] as const;
-export type ColorNames = typeof COLOR_NAMES[number];
-
-export type PaletteColors = Record<ColorNames, string> & { custom3: DetailedColorInput };
+export type PaletteColors = {
+    primary: IDetailedColorInput;
+    accent: string;
+    warn: string;
+    custom: string;
+};
