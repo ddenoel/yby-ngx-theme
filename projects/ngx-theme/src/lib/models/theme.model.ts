@@ -27,4 +27,8 @@ export class Theme implements ITheme {
     getColorShade(colorName: PaletteName, shade: ColorShadeName = 500): string {
         return this.getColorPalette(colorName).getColorShade(shade);
     }
+
+    getConstrast(colorName: PaletteName, shade: ColorShadeName | string = 500): string {
+        return this.getColorPalette(colorName).getContrast(shade);
+    }
 }

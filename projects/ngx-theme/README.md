@@ -89,7 +89,13 @@ type Palettes = { myPaletteName: string };
 type Colors = { myColorName: string };
 
 const colorConfig: IColorConfig<Palettes, Colors> = {
-    palettes: { myPaletteName: '#5876d9' },
+    palettes: { 
+        myPaletteName: '#5876d9', 
+        paletteWithContrast: { 
+            baseColor: '#7FB5B5', 
+            constrast: { dark: '#000000', light: '#ffffff' }, 
+        },
+    },
     simpleColors: { myColorName: '#2e959a' },
 };
 
@@ -108,11 +114,17 @@ export class AppModule {}
 ##### Injection tokens
 
 ```js
-type Palettes = { myPaletteName: string };
+type Palettes = { myPaletteName: string; paletteWithConstrast: DetailedColorInput; };
 type Colors = { myColorName: string };
 
 const colorConfig: IColorConfig<Palettes, Colors> = {
-    palettes: { myPaletteName: '#5876d9' },
+    palettes: { 
+        myPaletteName: '#5876d9',
+        paletteWithContrast: { 
+            baseColor: '#7FB5B5', 
+            constrast: { dark: '#000000', light: '#ffffff' }, 
+        },
+    },
     simpleColors: { myColorName: '#2e959a' },
 };
 
@@ -217,6 +229,6 @@ $my-theme: mat.define-light-theme(
 
 _Whenever I get time_ 🙃
 
--   Support of custom full palettes with contrast
 -   Material full scss palette generator
 -   Rgb colors
+-   Dark theme palettes

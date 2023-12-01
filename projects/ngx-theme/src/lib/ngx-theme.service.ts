@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, Optional } from '@angular/core';
 import { DEFAULT_OPTIONS } from './data/default-options.data';
 import { ColorConfig, IColorConfig } from './models/color-config.model';
-import { ColorShades } from './models/color-shade.model';
+import { ColorShadeName, ColorShades, isShade } from './models/color-shade.model';
 import { IThemeColorPalettes, PaletteName, Palette } from './models/palette.model';
 import { SimpleColorsName, IThemeSimpleColors } from './models/simple-colors.model';
 import { Theme } from './models/theme.model';
@@ -86,11 +86,15 @@ export class NgxThemeService<T extends IColorConfig = IColorConfig> {
 
     private setCssColorVariables(): void {
         if (this.theme.palettes) {
-            Object.entries<ColorShades>(this.theme.palettes).forEach(([colorName, shades]) => {
-                Object.entries<string>(shades).forEach(([shadeName, hexaValue]) => {
-                    this.setCssColorVariablesForShade(colorName, hexaValue, shadeName);
-                });
-            });
+            Object.entries<ColorShades | 'contrast'>(this.theme.palettes).forEach(
+                ([colorName, shades]) => {
+                    Object.entries<string>(shades)
+                        .filter(([shadeName]) => isShade(shadeName))
+                        .forEach(([shadeName, hexaValue]) => {
+                            this.setCssColorVariablesForShade(colorName, hexaValue, shadeName);
+                        });
+                },
+            );
         }
 
         Object.entries(this.theme.colors).forEach(([colorName, hexaValue]: [string, string]) => {
@@ -105,7 +109,9 @@ export class NgxThemeService<T extends IColorConfig = IColorConfig> {
     ): void {
         const cssVariables: Record<string, string> = {};
         const addSpaceRgb = this._options.frameworks.includes('tailwind');
-        const addContrast = this._options.frameworks.includes('material');
+        const addContrast =
+            this._options.frameworks.includes('material') ||
+            this._options.frameworks.includes('tailwind');
         const prefix = `--color-${colorName}`;
 
         if (!shadeName) {
@@ -123,7 +129,10 @@ export class NgxThemeService<T extends IColorConfig = IColorConfig> {
                 ColorUtils.fromHexToSpaceSeparatedRgb(hexaValue);
         }
         if (shadeName && addContrast) {
-            cssVariables[`${prefix}-${shadeName}-contrast`] = ColorUtils.getContrast(hexaValue);
+            cssVariables[`${prefix}-${shadeName}-contrast`] = this._theme.getConstrast(
+                colorName,
+                +shadeName as ColorShadeName,
+            );
         }
 
         Object.entries<string>(cssVariables).forEach(([key, value]) => {

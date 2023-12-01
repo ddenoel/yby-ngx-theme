@@ -4,18 +4,33 @@ import { ColorUtils } from '../utils/color-utils';
  * - Palettes: will generate a range of colors shades
  * - simpleColors: will remain single color
  *
+ * #### Simple colors
  * Each key must be of type `{ 'colorName': 'hexaValue' }`
+ *
+ * #### Palettes
+ * Each key must be of type either :
+ * - `{ 'colorName': { baseColor: 'hexaValue', contrast?: { light?: 'hexaValue', dark?: 'hexaValue' } } }`
+ * - `{ 'colorName': 'hexaValue' }` (like simple colors)
  */
 export type IColorConfig<
-    Palettes extends Record<string, string> = Record<string, string>,
+    Palettes extends IPalette = IPalette,
     SimpleColors extends Record<string, string> = Record<string, string>,
 > = {
     palettes?: Palettes;
     simpleColors?: SimpleColors;
 };
 
+type IPalette = Record<string, IColorInput>;
+
+export type IColorInput = string | IDetailedColorInput;
+
+export type IDetailedColorInput = {
+    baseColor: string;
+    contrast?: { light?: string; dark?: string };
+};
+
 export class ColorConfig<
-    Palettes extends Record<string, string> = Record<string, string>,
+    Palettes extends IPalette = IPalette,
     SimpleColors extends Record<string, string> = Record<string, string>,
 > implements IColorConfig<Palettes, SimpleColors>
 {
@@ -23,15 +38,46 @@ export class ColorConfig<
     simpleColors: SimpleColors = {} as SimpleColors;
 
     constructor(colorConfig: Partial<IColorConfig>) {
-        const setColor = (
-            [colorName, hexa]: [string, string],
-            destinationColor: Record<string, string>,
-        ) => {
-            if (!ColorUtils.isColorValidHexa(hexa)) {
-                console.error(
-                    `Color with name "${colorName}" = ${hexa} is not hexa color, it will be ignored.`,
-                );
+        const verifyColor = (hexa: string) => {
+            if (!hexa || !ColorUtils.isColorValidHexa(hexa)) {
+                console.error(`Color with hexa value "${hexa}" is not valid, it will be ignored.`);
 
+                return false;
+            }
+
+            return true;
+        };
+        const setColor = <T extends IColorInput>(
+            [colorName, hexa]: [string, T],
+            destinationColor: IPalette,
+        ) => {
+            let isValid = false;
+            let finalValue: T;
+            if (typeof hexa === 'string') {
+                isValid = verifyColor(hexa);
+                if (isValid) {
+                    finalValue = hexa;
+                }
+            } else {
+                const colorInput: IDetailedColorInput = {} as IDetailedColorInput;
+                if (verifyColor(hexa.baseColor)) {
+                    isValid = true;
+                    colorInput.baseColor = hexa.baseColor;
+
+                    if (verifyColor(hexa.contrast?.light)) {
+                        colorInput.contrast = colorInput.contrast || {};
+                        colorInput.contrast.light = hexa.contrast.light;
+                    }
+
+                    if (verifyColor(hexa.contrast?.light)) {
+                        colorInput.contrast = colorInput.contrast || {};
+                        colorInput.contrast.light = hexa.contrast.light;
+                    }
+
+                    finalValue = colorInput as T;
+                }
+            }
+            if (!isValid || !finalValue) {
                 return;
             }
             if (!destinationColor || !colorName) {
@@ -39,10 +85,11 @@ export class ColorConfig<
             }
             destinationColor[colorName] = hexa;
         };
+
         if (colorConfig?.palettes) {
-            Object.entries(colorConfig.palettes).forEach((colorEntry) =>
-                setColor(colorEntry, this.palettes),
-            );
+            Object.entries(colorConfig.palettes).forEach(([colorName, value]) => {
+                setColor([colorName, value], this.palettes);
+            });
         }
 
         if (colorConfig?.simpleColors) {

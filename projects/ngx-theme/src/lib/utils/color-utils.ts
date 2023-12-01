@@ -16,14 +16,13 @@ export class ColorUtils {
         return tinycolor.mix(color, mixColor, amount).toHexString();
     }
 
-    static getContrast(hex: string): string {
+    static getContrast(hex: string, dark = BASE_COLORS.black, light = BASE_COLORS.white): string {
         const color = tinycolor(hex);
         if (color.isLight()) {
-            // TODO add custom contrast colors
-            return BASE_COLORS.black;
+            return dark;
         }
 
-        return BASE_COLORS.white;
+        return light;
     }
 
     static fromHexToSpaceSeparatedRgb(hexa: string): string {

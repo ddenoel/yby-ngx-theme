@@ -32,6 +32,7 @@ function getColorShades(colorName) {
     const shades = {};
     colorShades.forEach(shadeName => {
         shades[shadeName] = `rgb(var(--color-${colorName}-${shadeName}-rgb) / <alpha-value>)`;
+        shades[`${shadeName}-contrast`] = `var(--color-${colorName}-${shadeName}-contrast)`;
     });
     shades['DEFAULT'] = getBaseColor(colorName);
 
